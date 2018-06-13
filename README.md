@@ -25,6 +25,33 @@ server on ort 1337.
 By connecting to it using [http://zpi3.local:1337/](http://zpi3.local:1337/)
 (adjust the hostname), you get a simple web IRC client included in the server.
 
+You can either send direct messages to the bot using `/msg lkbot command`,
+e.g. `/msg lkbot show clock`,
+or you can use the `#linkerbot` channel, which the linkerbot watches.
+
+When you want to run the `lkircbot`, you need to modify the source to include
+your specific LinkerKit setup!
+
+The example setup is this:
+
+```swift
+let shield = LKRBShield.default
+
+let lkDigi    = LKDigi()
+let lkButtons = LKButton2()
+let lkPIR     = LKPIR()
+let lkTemp    = LKTemp(interval: 60, valueType: .celsius)
+
+shield.connect(lkDigi,    to: .digital45)
+shield.connect(lkButtons, to: .digital2122)
+shield.connect(lkPIR,     to: .digital1213)
+shield.connect(lkTemp,    to: .analog23)
+```
+
+So we have the 7-segment LK-Digi on socket digital 4/5,
+the LK-Buttons-2 on socket digital 21/22,
+the LK-PIR on socket digital 12/13,
+and finally the temperature sensor LK-Temp on the *analog* socket 2/3.
 
 
 ### Who
